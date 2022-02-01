@@ -1,16 +1,12 @@
 import time
-
 import json
-
 import requests
-
 from  tqdm  import  tqdm
-
 from pprint import pprint
 
 
 class VkUser:
-    '''
+    """
     Класс VkUser - используется для работы с аккаунтом ВКонтакте.
 
     Основное применение - обработка информации о конкретном пользователе (пользователях).
@@ -22,7 +18,6 @@ class VkUser:
 
     version: str
         используемая версия API Вконтакте
-
 
     Methods
     -------
@@ -38,7 +33,6 @@ class VkUser:
     get_photos(album_id: str, rev: int, owner_id: int, extended: int, count: int)
         возвращает список фотографий в альбоме.
 
-
     Exceptions
     ----------
     Общих исключений, которые могут возникнуть при работе с API VK, достаточно много,
@@ -47,7 +41,7 @@ class VkUser:
     Специальные исключения, которые возникают при работе с конкретным методом,
     можно найти в документации к этим методам.
 
-    '''
+    """
 
     url = 'https://api.vk.com/method/'
 
@@ -58,8 +52,8 @@ class VkUser:
         }
 
     def _error_validator(self, response):
-        '''
-        Метод для обработки ошибок.
+        """
+        Метод обработки ошибок.
         Возвращает сообщение об ошибке и записывает возникающие ошибки в файл.
         Является приватным методом.
 
@@ -68,10 +62,9 @@ class VkUser:
         response: dict
             ответ сервера.
 
-
         В качестве возврата (return) метод использует логическое значение true либо false.
 
-        '''
+        """
 
         for value in response.values():
 
@@ -93,7 +86,7 @@ class VkUser:
                 return False
 
     def users_get(self, user_ids):
-        '''
+        """
         Метод, который возвращает расширенную информацию о пользователях.
 
         Parameters
@@ -101,17 +94,16 @@ class VkUser:
         user_ids: str
             перечисленные через запятую идентификаторы пользователей или их короткие имена (screen_name).
 
-
         Exceptions
         ----------
         При работе с данным методом возникают только общие исключения.
 
-        '''
+        Ссылка на официальную документацию: https://vk.com/dev/users.get
+
+        """
 
         res_user_list = []
-
         users_get_url = self.url + 'users.get'
-
         users_get_params = {
             'user_ids': user_ids
         }
@@ -119,15 +111,12 @@ class VkUser:
         response = requests.get(users_get_url, params={**self.params, **users_get_params})
 
         if response.status_code >= 200 and response.status_code < 300:
-
             req = response.json()
 
             if self._error_validator(req) == False:
 
                 for value in req.values():
-
                     for info in value:
-
                         user_dict = {
                             'id': info['id'],
                             'last_name': info['last_name'],
@@ -135,20 +124,17 @@ class VkUser:
                             'is_closed': info['is_closed'],
                             'can_access_closed': info['can_access_closed']
                         }
-
                         res_user_list.append(user_dict)
 
                 pprint(res_user_list)
-
                 print()
-
                 return res_user_list
 
             else:
                 print('Программа продолжает работу в штатном режиме.\n')
 
     def get_albums(self, owner_id, count):
-        '''
+        """
         Возвращает список фотоальбомов пользователя или сообщества.
 
         Parameters
@@ -165,15 +151,14 @@ class VkUser:
 
         Данное исключение является специальным для данного метода.
 
-
         В качестве возврата (return) метод использует результирующий список с информацией о фотоальбомах (res_albums_list).
 
-        '''
+        Ссылка на официальную документацию: https://vk.com/dev/photos.getAlbums
+
+        """
 
         res_albums_list = []
-
         get_albums_url = self.url + 'photos.getAlbums'
-
         get_albums_params = {
             'owner_id': owner_id,
             'count': count
@@ -182,15 +167,12 @@ class VkUser:
         response = requests.get(get_albums_url, params={**self.params, **get_albums_params})
 
         if (response.status_code >= 200 and response.status_code < 300):
-
                 req = response.json()
 
                 if self._error_validator(req) == False:
 
                     for value in tqdm(req['response']['items'], desc='Происходит формирование списка с информацией об альбомах, пожалуйста, подождите...', unit='S'):
-
                         time.sleep(1)
-
                         album_dict = {
                             'title': value['title'],
                             'user_id': value['owner_id'],
@@ -198,7 +180,6 @@ class VkUser:
                             'size': value['size'],
                             'description': value['description']
                         }
-
                         res_albums_list.append(album_dict)
 
                     print()
@@ -210,11 +191,9 @@ class VkUser:
                 else:
                     print('Программа продолжает работу в штатном режиме.\n')
 
-
-
     def get_photos(self, album_id, rev, owner_id, count, extended=1):
-        '''
-        Метод для формирования списка с информацией о фотографиях.
+        """
+        Метод формирования списка с информацией о фотографиях.
 
         Parameters
         ----------
@@ -227,7 +206,6 @@ class VkUser:
         saved — сохраненные фотографии.
         Возвращается только с ключом доступа пользователя в формате строки.
 
-
         rev: int
             порядок сортировки фотографий.
 
@@ -236,10 +214,8 @@ class VkUser:
         0 — хронологический.
         Флаг может принимать значения 1 или 0.
 
-
         owner_id: int
             идентификатор владельца альбома.
-
 
         extended: int
             возвращает дополнительные поля.
@@ -256,11 +232,9 @@ class VkUser:
         Если был задан параметр extended=0, то дополнительные поля не будут отображены.
         По умолчанию равно 1.
 
-
         count: int
             количество записей, которое будет получено.
         Максимальное значение 1000.
-
 
         Exceptions
         ----------
@@ -268,15 +242,14 @@ class VkUser:
 
         Данное исключение является специальным для данного метода.
 
-
         В качестве возврата (return) метод использует результирующий список с информацией о фотографиях (res_photos_list).
 
-        '''
+        Ссылка на официальную документацию: https://vk.com/dev/photos.get
+
+        """
 
         res_photos_list = []
-
         get_photos_url = self.url + 'photos.get'
-
         get_photos_params = {
             'owner_id': owner_id,
             'rev': rev,
@@ -288,23 +261,17 @@ class VkUser:
         response = requests.get(get_photos_url, params={**self.params, **get_photos_params})
 
         if response.status_code >= 200 and response.status_code < 300:
-
             req = response.json()
 
             if self._error_validator(req) == False:
-
                 print()
-
                 for value in tqdm(req['response']['items'], desc='Происходит формирование списка с информацией о фото, пожалуйста, подождите...', unit='S'):
-
                     time.sleep(1)
-
                     photo_dict = {
                         'file_name': f"{value['likes']['count']}_{value['date']}.jpg",
                         'size': value['sizes'][-1]['type'],
                         'url': value['sizes'][-1]['url']
                     }
-
                     res_photos_list.append(photo_dict)
 
                 print()
