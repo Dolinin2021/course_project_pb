@@ -1,10 +1,10 @@
 import json
+from pprint import pprint
 from google_drive import GoogleDrive
 from ya_disk import YandexDisk
 from vk_classes import VkUser
 from settings import vk_token, yandex_token
 from const import main_menu, documentation
-from pprint import pprint
 
 
 def program_interface():
