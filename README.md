@@ -70,3 +70,8 @@
 
 
 ## Скриншоты
+**Яндекс.Диск:**
+![margo_1](https://user-images.githubusercontent.com/89892788/152205799-35e8c3b0-444c-455a-a7fa-b3dc287300e4.png)
+
+**Google.Drive:**
+![margo_2](https://user-images.githubusercontent.com/89892788/152205822-5a9cad3c-28fb-43c4-a6e4-4f6dc6c2af28.png)
