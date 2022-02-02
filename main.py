@@ -1,4 +1,4 @@
-from interface import program_interface
+from functions.interface import program_interface
 
 if __name__ == '__main__':
 

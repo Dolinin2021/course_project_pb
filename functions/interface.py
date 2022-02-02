@@ -1,10 +1,10 @@
 import json
 from pprint import pprint
-from google_drive import GoogleDrive
-from ya_disk import YandexDisk
-from vk_classes import VkUser
+from classes.google_drive import GoogleDrive
+from classes.ya_disk import YandexDisk
+from classes.vk_classes import VkUser
 from settings import vk_token, yandex_token
-from const import main_menu, documentation
+from functions.const import main_menu, documentation
 
 
 def program_interface():
@@ -124,7 +124,7 @@ def program_interface():
 
             if user_input == '/get_photos':
 
-                album_id = str(input('Введите индентификатор альбома (wall, profile, saved): '))
+                album_id = str(input('Введите идентификатор альбома (wall, profile, saved): '))
                 print()
 
                 rev = int(input('Введите порядок сортировки (1 — антихронологический, 0 — хронологический): '))

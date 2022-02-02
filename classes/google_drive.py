@@ -42,8 +42,8 @@ class GoogleDrive:
 
         # Файл token.json хранит токены доступа и обновления пользователя,
         # он создается автоматически, когда поток авторизации завершается.
-        if os.path.exists('./token.json'):
-            creds = Credentials.from_authorized_user_file('./token.json', SCOPES)
+        if os.path.exists('classes/token.json'):
+            creds = Credentials.from_authorized_user_file('classes/token.json', SCOPES)
 
         # Если нет доступных (действительных) учетных данных, позвольте пользователю войти в систему.
         if not creds or not creds.valid:
@@ -51,11 +51,11 @@ class GoogleDrive:
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    './credentials.json', SCOPES)
+                    'classes/credentials.json', SCOPES)
                 creds = flow.run_local_server(port=0)
 
             # Сохранение учетных данных для следующего запуска.
-            with open('./token.json', 'w', encoding='utf-8') as token:
+            with open('classes/token.json', 'w', encoding='utf-8') as token:
                 token.write(creds.to_json())
 
         # Сервис, который будет использовать 3ю версию REST API Google.Drive,
@@ -173,8 +173,8 @@ class GoogleDrive:
                     media = MediaIoBaseUpload(file_content, mimetype='image/jpeg')
                     self.service.files().create(body=file_metadata, media_body=media, fields='id').execute()
 
-                print()
-                print('Данные успешно загружены.')
+            print()
+            print('Данные успешно загружены.')
 
         except googleapiclient.errors.HttpError as error:
             print(f"\nРабота метода была прервана ошибкой.\n"

@@ -76,7 +76,7 @@ class VkUser:
                       f"Сообщение об ошибке: \n{value['error_msg']}."
                       f"\n")
 
-                with open('log_vk.json', 'a', encoding='utf-8') as file_obj:
+                with open('classes/log_vk.json', 'a', encoding='utf-8') as file_obj:
                     print('Данные об ошибке сохранены в лог log_vk.json.')
                     json.dump(response, file_obj, ensure_ascii=False, indent=4)
 

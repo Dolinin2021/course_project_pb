@@ -92,7 +92,7 @@ class YandexDisk:
                   f"Сообщение об ошибке: \n{response['message']}\n"
                   f"Описание ошибки: \n{response['description']}\n")
 
-            with open('log_yandex.json', 'a', encoding='utf-8') as file_obj:
+            with open('classes/log_yandex.json', 'a', encoding='utf-8') as file_obj:
                 print('Данные об ошибке сохранены в лог log_yandex.json')
                 json.dump(response, file_obj, ensure_ascii=False, indent=4)
 
