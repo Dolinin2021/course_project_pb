@@ -1,5 +1,7 @@
 import json
 from pprint import pprint
+import settings
+import functions.const as const
 from classes.google_drive import GoogleDrive
 from classes.ya_disk import YandexDisk
 from classes.vk_classes import VkUser
@@ -57,6 +59,12 @@ def program_interface():
 
         if user_input == '/docs':
             print(documentation)
+
+        elif user_input == '/const_doc':
+            print(const.__doc__)
+
+        elif user_input == '/settings_doc':
+            print(settings.__doc__)
 
         elif user_input == '/program_interface_doc':
             print(program_interface.__doc__)
@@ -172,6 +180,10 @@ def program_interface():
                         print('\nСписок альбомов пользователя:\n')
                         pprint(temp_albums_list)
                         temp_albums_list.clear()
+
+            elif user_input == '/get_files_yandex_disk':
+                get_files_list = yandex_disk.get_files_list()
+                pprint(get_files_list)
 
             elif user_input == '/create_directory_yandex_disk':
                 path = str(input('Введите имя создаваемой папки: '))

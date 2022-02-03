@@ -6,11 +6,11 @@ from google.oauth2.credentials import Credentials
 from googleapiclient.http import MediaIoBaseUpload
 import googleapiclient.errors
 from  tqdm  import  tqdm
-from settings import SCOPES
 import requests
 import os.path
 import time
 import io
+from settings import SCOPES
 
 
 class GoogleDrive:

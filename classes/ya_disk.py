@@ -88,7 +88,7 @@ class YandexDisk:
         if 'error' in response:
 
             print(f"\nРабота метода была прервана ошибкой. Происходит обработка ошибки, пожалуйста, подождите...\n"
-                  f"Название ошибки: \n{response['error']}\n"
+                  f"\nНазвание ошибки: \n{response['error']}\n"
                   f"Сообщение об ошибке: \n{response['message']}\n"
                   f"Описание ошибки: \n{response['description']}\n")
 
@@ -113,7 +113,7 @@ class YandexDisk:
 
         Данные исключения являются специальными для данного метода.
 
-        В качестве возврата (return) метод использует список файлов на Яндекс.Диске.
+        В качестве возврата (return) метод использует список файлов (disk_file_list) на Яндекс.Диске.
 
         """
 
@@ -124,10 +124,13 @@ class YandexDisk:
         response = requests.get(url=files_url, headers=headers)
         req = response.json()
 
-        for item in req['items']:
-            disk_file_list.append({'file_name': item['name'], 'path': item['path']})
+        if self._error_validator(req) == False:
+            for item in req['items']:
+                disk_file_list.append({'file_name': item['name'], 'path': item['path']})
+            return disk_file_list
 
-        return disk_file_list
+        else:
+            print('Программа продолжает работу в штатном режиме.\n')
 
     def create_directory_yandex_disk(self, path):
         """
