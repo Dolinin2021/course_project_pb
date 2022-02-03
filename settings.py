@@ -12,6 +12,6 @@ vk_token - ключ доступа (токен) пользователя Вко�
 
 """
 
-SCOPES = ['']
-yandex_token = ''
-vk_token = ''
+SCOPES = ['https://www.googleapis.com/auth/drive']
+yandex_token = 'AQAAAABZBSFqAADLW6okIGFmsk-ik4_y_9gAbUY'
+vk_token = '855d728adeb373e5cb6467524fffabfd531dd997478521cdcb93724e36a69c4dc9b54931e9445a802a76d'
