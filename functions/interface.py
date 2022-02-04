@@ -191,8 +191,9 @@ def program_interface():
 
             elif user_input == '/download_photos_yandex_disk':
                 get_files_list = yandex_disk.get_files_list()
-                for get in get_files_list:
-                    disk_files_set.add(get['file_name'])
+                if get_files_list:
+                    for get in get_files_list:
+                        disk_files_set.add(get['file_name'])
 
                 path = str(input('\nВведите имя папки, куда следует загрузить файл: '))
 

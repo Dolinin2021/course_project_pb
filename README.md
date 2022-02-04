@@ -108,7 +108,7 @@
 1. Установить все пакеты из файла `requirements.txt` с помощью команды `pip install -r requirements.txt`
 2. Получить ключ доступа ([токен](https://dev.vk.com/api/access-token/getting-started)) пользователя Вконтакте.
 3. Получить ключ доступа (токен) с [полигона Яндекс.Диска](https://yandex.ru/dev/disk/poligon/).
-4. Получить полномочия ([credentials](https://developers.google.com/workspace/guides/create-credentials)) для использования Google.Drive API.
+4. Получить учётные данные ([credentials](https://developers.google.com/workspace/guides/create-credentials)) для использования Google.Drive API.
 5. Перед запуском заполнить все параметры в файле `settings.py`, подробнее в документации к файлу.
 
 
