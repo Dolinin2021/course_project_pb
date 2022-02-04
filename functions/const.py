@@ -20,7 +20,7 @@ main_menu = """
 Команды для работы с Google.Drive:
 /get_files_google_drive - получить список файлов на Google.Drive,
 /create_directory_google_drive - создать папку на Google.Drive с определённым именем,
-/download_photos_google_drive - загрузить фото на Google.Drive по определённому пути (задан по умолчанию).
+/download_photos_google_drive - загрузить фото на Google.Drive по определённому пути.
 """
 
 documentation = """

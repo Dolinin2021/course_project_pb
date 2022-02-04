@@ -125,7 +125,7 @@ def program_interface():
 
         elif user_input == '/exit_not_save':
             print()
-            print('Python Software, 2021. Все права защищены.')
+            print('Python Software, 2022. Все права защищены.')
             break
 
         try:
@@ -266,7 +266,7 @@ def program_interface():
                 print()
                 print('Данные успешно сохранены.')
                 print()
-                print('Python Software, 2021. Все права защищены.')
+                print('Python Software, 2022. Все права защищены.')
                 break
 
         except ValueError:
